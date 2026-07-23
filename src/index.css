@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    color: #fef2f2;
+    background-color: #070205;
+    background-image: 
+      radial-gradient(circle at 50% -10%, rgba(220, 38, 38, 0.22) 0%, transparent 65%),
+      radial-gradient(circle at 80% 60%, rgba(185, 28, 28, 0.12) 0%, transparent 50%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+/* Indian Flag (Tiranga) Color Utilities: Saffron (#FF9933), White (#FFFFFF), Green (#138808) */
+.text-tiranga {
+  background: linear-gradient(135deg, #FF9933 0%, #FFFFFF 48%, #138808 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-tiranga-h {
+  background: linear-gradient(90deg, #FF9933 0%, #FFFFFF 50%, #138808 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-saffron {
+  color: #FF9933;
+}
+
+.text-india-green {
+  color: #138808;
+}
+
+/* Hide scrollbar across all browsers for standard elements */
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Glassmorphism Styles themed around Yatra Logo (Crimson & Gold Glows) */
+.glass-nav {
+  background: rgba(12, 3, 7, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(220, 38, 38, 0.35);
+  box-shadow: 0 4px 30px rgba(185, 28, 28, 0.2);
+}
+
+.glass-card {
+  background: rgba(18, 5, 10, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.8), 0 0 25px 0 rgba(220, 38, 38, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-input {
+  background: rgba(26, 7, 14, 0.75);
+  border: 1.5px solid rgba(220, 38, 38, 0.4);
+  color: #fff1f2;
+  transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+  background: rgba(35, 9, 18, 0.9);
+  border-color: #ef4444;
+  outline: none;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.35), 0 0 5px rgba(251, 191, 36, 0.2);
+}
+
+/* Custom interactive animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+.glow-glow {
+  animation: pulse-glow 8s infinite ease-in-out;
+}
+
+/* Image caption pill animations */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px) translateX(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px) translateX(-50%);
+  }
+}
+
+@keyframes fadeSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.img-caption-pill {
+  animation: fadeSlideUp 0.8s ease forwards;
+}
+
+/* Image frame glow border */
+.img-frame-glow {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 40px rgba(0, 0, 0, 0.6),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Global Light Mode using CSS Filters */
+body.light-mode {
+  filter: invert(1) hue-rotate(180deg);
+  background-color: #f9f9f9;
+}
+
+body.light-mode img,
+body.light-mode video,
+body.light-mode canvas,
+body.light-mode iframe {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Hide Google Translate UI Elements Aggressively */
+.goog-te-banner-frame, 
+iframe.goog-te-banner-frame,
+.skiptranslate > iframe.goog-te-banner-frame,
+.VIpgJd-ZVi9od-ORHb-OEVmcd,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.goog-te-gadget-icon,
+#goog-gt-tt {
+  display: none !important;
+  visibility: hidden !important;
+}
+body {
+  top: 0px !important;
+  position: static !important;
+}
+html {
+  top: 0px !important;
+}
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+}
+.goog-text-highlight {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
