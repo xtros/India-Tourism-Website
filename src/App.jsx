@@ -59,7 +59,7 @@ export default function App() {
           muted
           loop
           playsInline
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover opacity-80 brightness-[0.85] contrast-[1.05]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover opacity-100 brightness-100 contrast-100"
           onLoadedMetadata={(e) => {
             e.target.currentTime = 5;
           }}

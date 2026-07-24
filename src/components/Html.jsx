@@ -1,77 +1,187 @@
 import React, { useState, useEffect } from "react";
 import { indiaStatesData } from "../data/indiaStatesData";
 
-// Curated high-quality image URLs for Indian tourism regions
+// Curated high-quality image URLs for Indian tourism regions across all 36 States & UTs
 export const regionImages = {
   // Andhra Pradesh
-  "Visakhapatnam": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-  "Araku Valley": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+  "Visakhapatnam": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80",
+  "Araku Valley": "https://i.ibb.co/nxkngvd/Araku-valley.jpg",
   "Tirupati": "https://images.unsplash.com/photo-1600100397608-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
 
   // Arunachal Pradesh
-  "Tawang": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+  "Tawang": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=600&q=80",
   "Ziro Valley": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80",
+  "Namdapha National Park": "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=600&q=80",
 
   // Assam
   "Kaziranga National Park": "https://images.unsplash.com/photo-1581888227599-779811939961?auto=format&fit=crop&w=600&q=80",
   "Majuli Island": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
+  "Guwahati": "https://images.unsplash.com/photo-1561361062-0be862a7c445?auto=format&fit=crop&w=600&q=80",
 
   // Bihar
   "Bodh Gaya": "https://images.unsplash.com/photo-1544982503-9f984c14501a?auto=format&fit=crop&w=600&q=80",
+  "Nalanda & Rajgir": "https://images.unsplash.com/photo-1608958220038-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
+  "Vaishali": "https://images.unsplash.com/photo-1626285888211-6be3f0e0413?auto=format&fit=crop&w=600&q=80",
+
+  // Chhattisgarh
+  "Bastar": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80",
+  "Chitrakote Falls": "https://i.postimg.cc/tRLH4MwT/Chitrakote-Waterfalls-6M4X-2X8-Tiratha-Chhattisgarh-494010-India.jpg",
+  "Sirpur": "https://images.unsplash.com/photo-1600100397608-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
 
   // Goa
-  "North Goa Beaches": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+  "North Goa Beaches": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80",
   "South Goa": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80",
   "Old Goa": "https://images.unsplash.com/photo-1590076247563-7eb63c9e55a3?auto=format&fit=crop&w=600&q=80",
 
   // Gujarat
   "Rann of Kutch": "https://images.unsplash.com/photo-1627894483216-2138af692e2e?auto=format&fit=crop&w=600&q=80",
   "Gir National Park": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80",
+  "Ahmedabad & Rani ki Vav": "https://images.unsplash.com/photo-1608958220038-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
+
+  // Haryana
+  "Kurukshetra": "https://images.unsplash.com/photo-1600100397608-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
+  "Sultanpur National Park": "https://images.unsplash.com/photo-1581888227599-779811939961?auto=format&fit=crop&w=600&q=80",
+  "Morni Hills": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
 
   // Himachal Pradesh
   "Manali & Solang Valley": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80",
   "Shimla": "https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=600&q=80",
   "Spiti Valley": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=600&q=80",
 
+  // Jharkhand
+  "Deoghar": "https://images.unsplash.com/photo-1600100397608-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
+  "Betla National Park": "https://images.unsplash.com/photo-1581888227599-779811939961?auto=format&fit=crop&w=600&q=80",
+  "Netarhat": "https://i.postimg.cc/43zYWccy/Patratu-Valley-Jharkhand.jpg",
+
   // Karnataka
   "Hampi Ruins": "https://images.unsplash.com/photo-1600100397608-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
   "Coorg (Kodagu)": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=600&q=80",
+  "Mysuru": "https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=600&q=80",
 
   // Kerala
   "Alleppey Backwaters": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=600&q=80",
   "Munnar Hills": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=600&q=80",
+  "Wayanad": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
 
   // Madhya Pradesh
   "Khajuraho Temples": "https://images.unsplash.com/photo-1626285888211-6be3f0e0413?auto=format&fit=crop&w=600&q=80",
   "Kanha Tiger Reserve": "https://images.unsplash.com/photo-1581888227599-779811939961?auto=format&fit=crop&w=600&q=80",
+  "Gwalior Fort": "https://images.unsplash.com/photo-1608958220038-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
 
   // Maharashtra
   "Mumbai": "https://images.unsplash.com/photo-1566552881560-0be862a7c445?auto=format&fit=crop&w=600&q=80",
   "Ajanta & Ellora Caves": "https://images.unsplash.com/photo-1608958220038-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
+  "Lonavala & Western Ghats": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+
+  // Manipur
+  "Loktak Lake": "https://i.postimg.cc/0yGv30V3/Phumdis.jpg",
+  "Keibul Lamjao National Park": "https://images.unsplash.com/photo-1581888227599-779811939961?auto=format&fit=crop&w=600&q=80",
+  "Imphal Valley": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80",
+
+  // Meghalaya
+  "Cherrapunji & Mawsynram": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+  "Living Root Bridges (Nongriat)": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=600&q=80",
+  "Shillong": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
+
+  // Mizoram
+  "Reiek Hill": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80",
+  "Vantawng Falls": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+  "Aizawl": "https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=600&q=80",
+
+  // Nagaland
+  "Kohima": "https://i.postimg.cc/P5dfd7vr/9-Famous-Nagaland-Tourist-Places-to-Visit.jpg",
+  "Dzukou Valley": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+  "Mokokchung": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
+
+  // Odisha
+  "Konark Sun Temple": "https://images.unsplash.com/photo-1600100397608-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
+  "Puri": "https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=600&q=80",
+  "Chilika Lake": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=600&q=80",
+
+  // Punjab
+  "Amritsar (Golden Temple)": "https://images.unsplash.com/photo-1588096344316-f71c8f1f2e87?auto=format&fit=crop&w=600&q=80",
+  "Wagah Border": "https://images.unsplash.com/photo-1566552881560-0be862a7c445?auto=format&fit=crop&w=600&q=80",
+  "Patiala": "https://images.unsplash.com/photo-1608958220038-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
 
   // Rajasthan
   "Jaipur (Pink City)": "https://images.unsplash.com/photo-1603258838383-8b7c7b2a6b2a?auto=format&fit=crop&w=600&q=80",
   "Udaipur (City of Lakes)": "https://images.unsplash.com/photo-1562137976-a19c5c2d3a33?auto=format&fit=crop&w=600&q=80",
   "Jaisalmer (Golden City)": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80",
 
+  // Sikkim
+  "Gangtok": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=600&q=80",
+  "Tsomgo Lake & Nathula Pass": "https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=600&q=80",
+  "Yumthang Valley": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+
   // Tamil Nadu
   "Madurai Meenakshi Temple": "https://images.unsplash.com/photo-1600100397608-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
   "Mahabalipuram": "https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=600&q=80",
+  "Ooty & Nilgiri Hills": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=600&q=80",
+
+  // Telangana
+  "Hyderabad (Charminar)": "https://images.unsplash.com/photo-1608958220038-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
+  "Warangal & Ramappa Temple": "https://images.unsplash.com/photo-1600100397608-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
+  "Nagarjuna Sagar Dam": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+
+  // Tripura
+  "Unakoti Hills": "https://images.unsplash.com/photo-1608958220038-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
+  "Neermahal Palace": "https://images.unsplash.com/photo-1562137976-a19c5c2d3a33?auto=format&fit=crop&w=600&q=80",
+  "Agartala": "https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=600&q=80",
 
   // Uttar Pradesh
   "Agra (Taj Mahal)": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=600&q=80",
   "Varanasi (Kashi)": "https://images.unsplash.com/photo-1561361062-0be862a7c445?auto=format&fit=crop&w=600&q=80",
+  "Ayodhya & Prayagraj": "https://images.unsplash.com/photo-1600100397608-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
 
   // Uttarakhand
   "Rishikesh & Haridwar": "https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=600&q=80",
   "Valley of Flowers": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+  "Nainital & Mussoorie": "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=600&q=80",
 
   // West Bengal
   "Kolkata": "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=600&q=80",
   "Darjeeling": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=600&q=80",
+  "Sundarbans National Park": "https://images.unsplash.com/photo-1581888227599-779811939961?auto=format&fit=crop&w=600&q=80",
 
   // Ladakh
   "Pangong Tso Lake": "https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=600&q=80",
+  "Nubra Valley": "https://images.unsplash.com/photo-1627894483216-2138af692e2e?auto=format&fit=crop&w=600&q=80",
+  "Leh & Monasteries": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=600&q=80",
+
+  // Jammu & Kashmir
+  "Srinagar & Dal Lake": "https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=600&q=80",
+  "Gulmarg": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80",
+  "Pahalgam": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+
+  // Andaman & Nicobar Islands
+  "Havelock Island (Swaraj Dweep)": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+  "Cellular Jail (Port Blair)": "https://images.unsplash.com/photo-1608958220038-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
+  "Neil Island (Shaheed Dweep)": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80",
+
+  // Delhi
+  "Red Fort & Chandni Chowk": "https://images.unsplash.com/photo-1588096344316-f71c8f1f2e87?auto=format&fit=crop&w=600&q=80",
+  "Qutub Minar & Lotus Temple": "https://images.unsplash.com/photo-1608958220038-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
+  "India Gate & Kartavya Path": "https://images.unsplash.com/photo-1566552881560-0be862a7c445?auto=format&fit=crop&w=600&q=80",
+
+  // Chandigarh
+  "Nek Chand Rock Garden": "https://images.unsplash.com/photo-1608958220038-f010e42ed97c?auto=format&fit=crop&w=600&q=80",
+  "Sukhna Lake": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=600&q=80",
+  "Zakir Hussain Rose Garden": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+
+  // Puducherry
+  "White Town (French Quarter)": "https://images.unsplash.com/photo-1590076247563-7eb63c9e55a3?auto=format&fit=crop&w=600&q=80",
+  "Auroville": "https://images.unsplash.com/photo-1544982503-9f984c14501a?auto=format&fit=crop&w=600&q=80",
+  "Promenade & Paradise Beach": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+
+  // Lakshadweep
+  "Bangaram Atoll": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+  "Agatti Island": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80",
+  "Kavaratti": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=600&q=80",
+
+  // Dadra & Nagar Haveli & Daman & Diu
+  "Diu Fort & Naida Caves": "https://images.unsplash.com/photo-1590766940554-634a7ed41450?auto=format&fit=crop&w=600&q=80",
+  "Devka & Ghoghla Beach": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+  "Silvassa (Dadra)": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
 };
 
 
@@ -139,55 +249,7 @@ export const stateVideos = {
   damananddiu: "jmSsV6LIygM",
 };
 
-export const stateMp4Videos = {
-  // Mountain / Himalayan states
-  jammuandkashmir: "https://assets.mixkit.co/videos/preview/mixkit-flying-over-a-snowy-mountain-range-41529-large.mp4",
-  ladakh: "https://assets.mixkit.co/videos/preview/mixkit-flying-over-a-snowy-mountain-range-41529-large.mp4",
-  himachalpradesh: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4",
-  uttarakhand: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4",
-  sikkim: "https://assets.mixkit.co/videos/preview/mixkit-flying-over-a-snowy-mountain-range-41529-large.mp4",
-  arunachalpradesh: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4",
 
-  // Coastal / Tropical states
-  kerala: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beach-with-turquoise-water-41526-large.mp4",
-  goa: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beach-with-turquoise-water-41526-large.mp4",
-  tamilnadu: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beach-with-turquoise-water-41526-large.mp4",
-  andamanandnicobar: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beach-with-turquoise-water-41526-large.mp4",
-  lakshadweep: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beach-with-turquoise-water-41526-large.mp4",
-  puducherry: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beach-with-turquoise-water-41526-large.mp4",
-
-  // Desert / Royal West states
-  rajasthan: "https://assets.mixkit.co/videos/preview/mixkit-dunes-in-a-desert-41530-large.mp4",
-  gujarat: "https://assets.mixkit.co/videos/preview/mixkit-dunes-in-a-desert-41530-large.mp4",
-
-  // Nature / Rainforest / Forest states
-  meghalaya: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4",
-  assam: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4",
-  nagaland: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4",
-  manipur: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4",
-  mizoram: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4",
-  tripura: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4",
-  chhattisgarh: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4",
-  madhyapradesh: "https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4",
-
-  // Heritage / Urban states
-  maharashtra: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  karnataka: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  andhrapradesh: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  telangana: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  uttarpradesh: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  bihar: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  westbengal: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  odisha: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  punjab: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  haryana: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  jharkhand: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  delhi: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  chandigarh: "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4",
-  dadraandnagarhavelianddamananddiu: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beach-with-turquoise-water-41526-large.mp4",
-};
-
-export const defaultMp4Video = "https://assets.mixkit.co/videos/preview/mixkit-tree-branches-in-the-breeze-1187-large.mp4";
 
 const themeColors = {
   mountain: { main: '#38bdf8', hover: '#7dd3fc' }, // Sky Blue
@@ -283,7 +345,7 @@ const Html = ({ section, setSection, onOpenDetail }) => {
       {embedUrl && (
         <div
           className="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1] overflow-hidden transition-opacity duration-1000 bg-[#06060f]"
-          style={{ opacity: section > 0 && section <= indiaStatesData.length && videoId ? 0.35 : 0 }}
+          style={{ opacity: section > 0 && section <= indiaStatesData.length && videoId ? 0.80 : 0 }}
         >
           <iframe
             key={embedUrl}
@@ -292,7 +354,7 @@ const Html = ({ section, setSection, onOpenDetail }) => {
             allow="autoplay; encrypted-media"
             tabIndex="-1"
             aria-hidden="true"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none scale-[1.75] md:scale-[1.85] brightness-[0.85] contrast-[1.05]"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none scale-[1.75] md:scale-[1.85] brightness-100 contrast-100"
             style={{
               width: "100vw",
               height: "100vh",
@@ -336,7 +398,7 @@ const Html = ({ section, setSection, onOpenDetail }) => {
           >
             {/* Slide-in details card with warm, humanistic editorial glass design */}
             <div
-              className={`w-full max-w-lg md:max-w-3xl max-h-[85vh] overflow-y-auto scrollbar-thin bg-[#0e070c]/80 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 md:p-10 border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.8)] transition-all duration-1000 transform ${isCurrent
+              className={`w-full max-w-lg md:max-w-3xl max-h-[85vh] overflow-y-auto scrollbar-thin bg-[#060609] rounded-3xl p-6 sm:p-8 md:p-10 border border-white/20 shadow-[0_20px_60px_rgba(0,0,0,0.9)] transition-all duration-1000 transform ${isCurrent
                 ? "opacity-100 translate-x-0 scale-100"
                 : "opacity-0 -translate-x-16 scale-90 pointer-events-none"
                 }`}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getStateTheme, stateVideos, regionImages, stateMp4Videos, defaultMp4Video } from "./Html";
+import { getStateTheme, stateVideos, regionImages } from "./Html";
 import { stateCapitalCoordinates, calculateDistance, estimateTravelCosts } from "../data/travelData";
 
 // Curated culture data fallbacks for states and UTs
@@ -260,7 +260,7 @@ const StateDetailModal = ({ state, onClose }) => {
     <>
       {/* Background Zero-Controls Video Player */}
       {embedUrl && (
-        <div className="fixed inset-0 w-full h-full pointer-events-none z-[90] overflow-hidden bg-[#06060f]">
+        <div className="fixed inset-0 w-full h-full pointer-events-none z-[90] overflow-hidden bg-transparent">
           <iframe
             key={embedUrl}
             src={embedUrl}
@@ -268,7 +268,7 @@ const StateDetailModal = ({ state, onClose }) => {
             allow="autoplay; encrypted-media"
             tabIndex="-1"
             aria-hidden="true"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-40 scale-[1.75] md:scale-[1.85] brightness-[0.85] contrast-[1.05]"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-100 scale-[1.75] md:scale-[1.85] brightness-100 contrast-100"
             style={{
               width: "100vw",
               height: "100vh",
@@ -279,7 +279,7 @@ const StateDetailModal = ({ state, onClose }) => {
         </div>
       )}
 
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-6 bg-black/40 animate-fadeIn select-none overflow-hidden">
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-6 bg-black/20 animate-fadeIn select-none overflow-hidden">
         {/* Container */}
         <div style={{
           '--theme-main': themeColors[activeTheme]?.main || themeColors.heritage.main,
@@ -287,10 +287,10 @@ const StateDetailModal = ({ state, onClose }) => {
           '--theme-bg-light': (themeColors[activeTheme]?.main || themeColors.heritage.main) + '1A', // 10% opacity
           '--theme-border': (themeColors[activeTheme]?.main || themeColors.heritage.main) + '4D', // 30% opacity
           '--theme-shadow': (themeColors[activeTheme]?.main || themeColors.heritage.main) + '33', // 20% opacity
-        }} className="relative w-full h-full max-w-7xl md:h-[85vh] bg-transparent md:rounded-[2rem] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-white/10">
+        }} className="relative w-full h-full max-w-7xl md:h-[85vh] bg-transparent md:rounded-[2rem] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-white/20">
 
           {/* LEFT PANEL - Editorial State Highlight Card */}
-          <div className="w-full md:w-[36%] bg-[#0e070c]/85 backdrop-blur-2xl border-b md:border-b-0 md:border-r border-white/15 flex flex-col justify-between p-5 sm:p-7 md:p-9 z-10 shrink-0 max-h-[40vh] md:max-h-none md:h-full overflow-y-auto scrollbar-thin">
+          <div className="w-full md:w-[36%] bg-black/85 border-b md:border-b-0 md:border-r border-white/15 flex flex-col justify-between p-5 sm:p-7 md:p-9 z-10 shrink-0 max-h-[40vh] md:max-h-none md:h-full overflow-y-auto scrollbar-thin">
             <div className="space-y-4 sm:space-y-6">
               {/* Top Controls (Left Panel) */}
               <div className="flex items-center justify-between">
@@ -348,21 +348,21 @@ const StateDetailModal = ({ state, onClose }) => {
 
             {/* Humanistic Meta Pill Badges */}
             <div className="mt-5 sm:mt-8 space-y-2.5">
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-3 sm:p-3.5 flex items-center space-x-3 text-xs font-sans">
+              <div className="bg-[#0c0c12] border border-white/15 rounded-2xl p-3 sm:p-3.5 flex items-center space-x-3 text-xs font-sans">
                 <span className="text-lg">📍</span>
                 <div>
                   <span className="text-slate-400 block text-[10px] font-medium uppercase tracking-wider">Capital City</span>
                   <strong className="text-white font-semibold">{state.capital}</strong>
                 </div>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-3 sm:p-3.5 flex items-center space-x-3 text-xs font-sans">
+              <div className="bg-[#0c0c12] border border-white/15 rounded-2xl p-3 sm:p-3.5 flex items-center space-x-3 text-xs font-sans">
                 <span className="text-lg">✨</span>
                 <div>
                   <span className="text-slate-400 block text-[10px] font-medium uppercase tracking-wider">Best Time to Visit</span>
                   <strong className="text-amber-300 font-semibold">{cultureInfo.bestTime}</strong>
                 </div>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-3 sm:p-3.5 flex items-center space-x-3 text-xs font-sans">
+              <div className="bg-[#0c0c12] border border-white/15 rounded-2xl p-3 sm:p-3.5 flex items-center space-x-3 text-xs font-sans">
                 <span className="text-lg">🗣️</span>
                 <div>
                   <span className="text-slate-400 block text-[10px] font-medium uppercase tracking-wider">Primary Languages</span>
@@ -373,12 +373,12 @@ const StateDetailModal = ({ state, onClose }) => {
           </div>
 
           {/* RIGHT PANEL - Scrollable Content */}
-          <div className="w-full md:w-[64%] bg-[#08040a]/90 backdrop-blur-md flex flex-col flex-1 md:h-full relative z-0 min-h-0">
+          <div className="w-full md:w-[64%] bg-black/80 flex flex-col flex-1 md:h-full relative z-0 min-h-0">
             {/* Top Bar Right Panel */}
-            <div className="hidden md:flex items-center justify-between px-8 py-5 border-b border-white/10 bg-black/50 backdrop-blur-xl absolute top-0 left-0 w-full z-20">
+            <div className="hidden md:flex items-center justify-between px-8 py-5 border-b border-white/15 bg-black/90 absolute top-0 left-0 w-full z-20">
               <div className="text-xs font-sans font-medium text-amber-200/90 tracking-wider flex items-center space-x-2">
-                <span>🌟</span>
-                <span>Discover Incredible India • Regional Travel Guide</span>
+                <span>🌿</span>
+                <span>Journey Through <strong className="text-amber-300 font-semibold">{state?.name}</strong> • Stories, Culture & Heritage</span>
               </div>
               <button
                 onClick={onClose}
@@ -401,12 +401,12 @@ const StateDetailModal = ({ state, onClose }) => {
             <div className="overflow-y-auto scrollbar-thin flex-1 pt-4 sm:pt-6 md:pt-24 pb-8 sm:pb-10 px-4 sm:px-6 md:px-8 space-y-6 sm:space-y-8 h-full">
 
               {/* Navigation Tabs */}
-              <div className="flex items-center space-x-2 border-b border-white/10 pb-3.5 sticky top-0 bg-[#08040a]/95 backdrop-blur-xl z-10 pt-1 -mt-1 overflow-x-auto">
+              <div className="flex items-center space-x-2 border-b border-white/15 pb-3.5 sticky top-0 bg-black/90 z-10 pt-1 -mt-1 overflow-x-auto">
                 <button
                   onClick={() => setActiveTab("overview")}
                   className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs font-sans font-semibold tracking-wide transition-all whitespace-nowrap ${activeTab === "overview"
                     ? "bg-amber-500 text-black shadow-md shadow-amber-500/20"
-                    : "bg-white/5 text-slate-200 hover:bg-white/10 border border-white/10"
+                    : "bg-[#12121a] text-slate-200 hover:bg-[#1a1a24] border border-white/15"
                     }`}
                 >
                   📍 Destinations ({state.regions?.length || 0})
@@ -415,7 +415,7 @@ const StateDetailModal = ({ state, onClose }) => {
                   onClick={() => setActiveTab("culture")}
                   className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs font-sans font-semibold tracking-wide transition-all whitespace-nowrap ${activeTab === "culture"
                     ? "bg-amber-500 text-black shadow-md shadow-amber-500/20"
-                    : "bg-white/5 text-slate-200 hover:bg-white/10 border border-white/10"
+                    : "bg-[#12121a] text-slate-200 hover:bg-[#1a1a24] border border-white/15"
                     }`}
                 >
                   🎭 Culture & Heritage
@@ -424,7 +424,7 @@ const StateDetailModal = ({ state, onClose }) => {
                   onClick={() => setActiveTab("festivals")}
                   className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs font-sans font-semibold tracking-wide transition-all whitespace-nowrap ${activeTab === "festivals"
                     ? "bg-amber-500 text-black shadow-md shadow-amber-500/20"
-                    : "bg-white/5 text-slate-200 hover:bg-white/10 border border-white/10"
+                    : "bg-[#12121a] text-slate-200 hover:bg-[#1a1a24] border border-white/15"
                     }`}
                 >
                   📅 Festivals ({state.events?.length || 0})
@@ -433,7 +433,7 @@ const StateDetailModal = ({ state, onClose }) => {
                   onClick={() => setActiveTab("travel")}
                   className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs font-sans font-semibold tracking-wide transition-all whitespace-nowrap ${activeTab === "travel"
                     ? "bg-amber-500 text-black shadow-md shadow-amber-500/20"
-                    : "bg-white/5 text-slate-200 hover:bg-white/10 border border-white/10"
+                    : "bg-[#12121a] text-slate-200 hover:bg-[#1a1a24] border border-white/15"
                     }`}
                 >
                   ✈️ Trip Planner
@@ -454,7 +454,7 @@ const StateDetailModal = ({ state, onClose }) => {
                       return (
                         <div
                           key={idx}
-                          className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 space-y-3.5 hover:bg-white/10 transition-all duration-300 hover:border-amber-400/40 flex flex-col justify-between group cursor-pointer shadow-md overflow-hidden"
+                          className="bg-[#0d0d12] border border-white/15 rounded-2xl p-4 sm:p-5 space-y-3.5 hover:bg-[#14141c] transition-all duration-300 hover:border-amber-400/50 flex flex-col justify-between group cursor-pointer shadow-md overflow-hidden"
                           onClick={() => window.open(`https://www.google.com/search?q=${encodeURIComponent(region.name + ' ' + state.name + ' tourism')}`, '_blank')}
                         >
                           {/* Destination Photography Header */}
@@ -501,7 +501,7 @@ const StateDetailModal = ({ state, onClose }) => {
               {/* TAB 2: CULTURE & TRADITIONS */}
               {activeTab === "culture" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+                  <div className="bg-[#0d0d12] border border-white/15 rounded-2xl p-6 space-y-4">
                     <div className="flex items-center space-x-3 text-[color:var(--theme-main)]">
                       <span className="text-3xl">🎭</span>
                       <h4 className="text-xs font-bold font-mono uppercase tracking-widest leading-relaxed">Folk Dance & Art Forms</h4>
@@ -512,18 +512,18 @@ const StateDetailModal = ({ state, onClose }) => {
                     </p>
                   </div>
 
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+                  <div className="bg-[#0d0d12] border border-white/15 rounded-2xl p-6 space-y-4">
                     <div className="flex items-center space-x-3 text-[color:var(--theme-main)]">
                       <span className="text-3xl">👘</span>
                       <h4 className="text-xs font-bold font-mono uppercase tracking-widest leading-relaxed">Traditional Attire & Crafts</h4>
                     </div>
                     <p className="text-sm font-bold font-sans text-white border-t border-white/10 pt-4">{cultureInfo.attire}</p>
                     <p className="text-xs text-slate-400 leading-relaxed font-sans">
-                      Intricate handloom weaves, silk embroideries, and regional handicrafts crafted by master artisans.
+                      Exquisite handwoven textiles and traditional crafts reflecting rich regional heritage.
                     </p>
                   </div>
 
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4 md:col-span-2">
+                  <div className="bg-[#0d0d12] border border-white/15 rounded-2xl p-6 space-y-4 md:col-span-2">
                     <div className="flex items-center space-x-3 text-[color:var(--theme-main)]">
                       <span className="text-3xl">🍲</span>
                       <h4 className="text-xs font-bold font-mono uppercase tracking-widest">Culinary Heritage & Signature Dishes</h4>
@@ -546,7 +546,7 @@ const StateDetailModal = ({ state, onClose }) => {
                     {state.events?.map((evt, idx) => (
                       <div
                         key={idx}
-                        className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4 hover:bg-white/[0.08] transition-all"
+                        className="bg-[#0d0d12] border border-white/15 rounded-2xl p-6 space-y-4 hover:bg-[#14141c] transition-all"
                       >
                         <div className="flex items-start justify-between border-b border-white/10 pb-3 gap-4">
                           <h4 className="text-sm font-bold font-display text-white uppercase leading-tight">{evt.name}</h4>
@@ -570,7 +570,7 @@ const StateDetailModal = ({ state, onClose }) => {
                     Cost-Efficient Route Planner
                   </h3>
 
-                  <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0d0d12] border border-white/15 rounded-2xl p-6">
                     <p className="text-xs text-slate-400 mb-4 font-sans">
                       Calculate estimated travel costs and durations to <strong className="text-white">{state.name}</strong> from your city.
                     </p>
@@ -583,7 +583,7 @@ const StateDetailModal = ({ state, onClose }) => {
                           value={travelOrigin}
                           onChange={(e) => setTravelOrigin(e.target.value)}
                           onKeyDown={(e) => e.key === 'Enter' && handleEstimateCosts()}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-[color:var(--theme-main)] transition-colors"
+                          className="w-full bg-[#14141a] border border-white/20 rounded-xl py-3 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-[color:var(--theme-main)] transition-colors"
                         />
                       </div>
                       <button
@@ -605,7 +605,7 @@ const StateDetailModal = ({ state, onClose }) => {
 
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {travelData.costs.flight && (
-                          <div className="bg-white/5 border border-sky-400/30 rounded-2xl p-5 hover:bg-sky-400/10 transition-colors">
+                          <div className="bg-[#0d0d12] border border-sky-400/30 rounded-2xl p-5 hover:bg-sky-400/10 transition-colors">
                             <div className="flex items-center space-x-2 mb-3">
                               <span className="text-xl">✈️</span>
                               <h4 className="text-sm font-bold text-sky-400 uppercase">Flight</h4>
@@ -625,7 +625,7 @@ const StateDetailModal = ({ state, onClose }) => {
                         )}
 
                         {travelData.costs.train && (
-                          <div className="bg-white/5 border border-amber-400/30 rounded-2xl p-5 hover:bg-amber-400/10 transition-colors">
+                          <div className="bg-[#0d0d12] border border-amber-400/30 rounded-2xl p-5 hover:bg-amber-400/10 transition-colors">
                             <div className="flex items-center space-x-2 mb-3">
                               <span className="text-xl">🚆</span>
                               <h4 className="text-sm font-bold text-amber-400 uppercase">Train (AC)</h4>
@@ -645,7 +645,7 @@ const StateDetailModal = ({ state, onClose }) => {
                         )}
 
                         {travelData.costs.bus && (
-                          <div className="bg-white/5 border border-emerald-400/30 rounded-2xl p-5 hover:bg-emerald-400/10 transition-colors">
+                          <div className="bg-[#0d0d12] border border-emerald-400/30 rounded-2xl p-5 hover:bg-emerald-400/10 transition-colors">
                             <div className="flex items-center space-x-2 mb-3">
                               <span className="text-xl">🚌</span>
                               <h4 className="text-sm font-bold text-emerald-400 uppercase">Volvo Bus</h4>
