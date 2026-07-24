@@ -308,10 +308,10 @@ const Html = ({ section, setSection, onOpenDetail }) => {
         <h1 className="text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-[0.25em] sm:tracking-[0.3em] font-display text-tiranga drop-shadow-[0_5px_30px_rgba(255,153,51,0.35)] uppercase animate-fade-in">
           BHARAT
         </h1>
-        <p className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.3em] sm:tracking-[0.5em] mt-6 md:mt-8 uppercase drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] flex items-center justify-center space-x-1.5 sm:space-x-3">
-          <span className="text-[#FF9933]">INCREDIBLE INDIA</span>
+        <p className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.3em] sm:tracking-[0.5em] mt-6 md:mt-8 uppercase drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] flex items-center justify-center space-x-1.5 sm:space-x-3 preserve-colors">
+          <span className="text-[#FF9933] text-saffron">INCREDIBLE INDIA</span>
           <span className="text-white font-mono">•</span>
-          <span className="text-[#138808]">ONE LAND, A MILLION JOURNEYS</span>
+          <span className="text-[#138808] text-india-green">ONE LAND, A MILLION JOURNEYS</span>
         </p>
 
         {/* Scroll down indicator */}
